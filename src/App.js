@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import {useState, createContext} from 'react';
 import './App.css';
+import AutoComplete from './components/AutoComplete'
+import CurrentWeather from './components/CurrentWeather'
+
+export const AppContext = createContext(null);
 
 function App() {
+
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
+  const [cityKey, setCityKey] = useState()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{
+      city,
+      setCity,
+      country,
+      setCountry,
+      cityKey,
+      setCityKey
+    }}>
+      <div className="App">
+        <AutoComplete/>
+        <CurrentWeather/>
+      </div>
+    </AppContext.Provider>
   );
 }
 
